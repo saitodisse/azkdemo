@@ -24,7 +24,7 @@ systems({
       '/azk/#{manifest.dir}': path('.'),
       '/azk/#{manifest.dir}/node_modules': persistent('node-modules-#{system.name}'),
     },
-    scalable: {'default': 1},
+    scalable: {'default': 2},
     http: {
       domains: [ '#{system.name}.#{azk.default_domain}' ]
     },
