@@ -22,7 +22,10 @@ systems({
     },
     scalable: {"default": 2},
     http: {
-      domains: [ "#{system.name}.#{azk.default_domain}" ]
+      domains: [
+        "#{system.name}.#{azk.default_domain}",
+        "#{process.env.AZK_HOST_IP}"
+      ]
     },
     envs: {
       // set instances variables
