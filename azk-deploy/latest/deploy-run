@@ -21,6 +21,11 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 [ -z $GIT_REMOTE ] && \
   GIT_REMOTE='azk_deploy'
 
+[ -z $AZK_RESTART_COMMAND ] && \
+  AZK_RESTART_COMMAND='azk restart -R'
+[ -z $AZK_CHECKOUT_COMMIT_BRANCH_TAG ] && \
+  AZK_CHECKOUT_COMMIT_BRANCH_TAG='master'
+
 if ( cd ${LOCAL_PROJECT_PATH}; git remote | grep -q "^${GIT_REMOTE}$" ); then
   REMOTE_PROJECT_PATH=$( cd ${LOCAL_PROJECT_PATH}; git remote -v | grep -P "^${GIT_REMOTE}\t" | head -1 | awk '{ print $2 }' | sed 's/.*\:\/\/.*@[^:]*\(:[0-9]\+\)\?//' | sed 's/\.git//' )
 else
@@ -40,7 +45,7 @@ REMOTE_GIT_PATH="${REMOTE_PROJECT_PATH}.git"
 
 if [ -z ${RUN_SETUP} ] || [ "${RUN_SETUP}" = "true" ]; then
   # Provisioning
-  ansible-playbook playbooks/setup.yml --extra-vars "user=${REMOTE_USER} src_dir=${REMOTE_PROJECT_PATH} git_dir=${REMOTE_GIT_PATH} azk_domain=${AZK_DOMAIN}"
+  ansible-playbook playbooks/setup.yml --extra-vars "user=${REMOTE_USER} src_dir=${REMOTE_PROJECT_PATH} git_dir=${REMOTE_GIT_PATH} azk_domain=${AZK_DOMAIN} azk_restart_command=${AZK_RESTART_COMMAND} azk_checkout_commit_branch_tag=${AZK_CHECKOUT_COMMIT_BRANCH_TAG}"
   ansible-playbook playbooks/reset.yml || true
 fi
 
@@ -49,7 +54,7 @@ if [ -z ${RUN_DEPLOY} ] || [ "${RUN_DEPLOY}" = "true" ]; then
   cd ${LOCAL_PROJECT_PATH}
   quiet git remote rm ${GIT_REMOTE} || true
   quiet git remote add ${GIT_REMOTE} ssh://${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PORT}${REMOTE_GIT_PATH} || true
-  git push ${GIT_REMOTE} master
+  git push ${GIT_REMOTE} ${AZK_CHECKOUT_COMMIT_BRANCH_TAG}
 fi
 
 echo
