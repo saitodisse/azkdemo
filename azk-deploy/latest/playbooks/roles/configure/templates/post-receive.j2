@@ -2,7 +2,7 @@
 # post-receive hook
 . /home/{{ user }}/.ip_addr
 # post-receive hook and go to branch, commit or tag
-git --work-tree={{ src_dir }} --git-dir={{ git_dir }} checkout {{ azk_checkout_commit_branch_tag }} -f
+git --work-tree={{ src_dir }} --git-dir={{ git_dir }} checkout {{ git_checkout_commit_branch_tag }} -f
 cd {{ src_dir }}
 {{ azk_agent_start_command }}
 echo ""; echo "Starting azk. Maybe downloading images be needed. Please be patient."
