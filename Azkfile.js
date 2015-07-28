@@ -33,6 +33,7 @@ systems({
     envs: {
       // set instances variables
       NODE_ENV: 'dev',
+      PORT: '3000'
     },
   },
   // Adds the 'redis' system
