@@ -54,7 +54,7 @@ systems({
    * deploys
    */
   deploy: {
-    image: {'docker': 'azukiapp/deploy'},
+    image: {'dockerfile': '/home/julio/_git/docker-deploy/latest/Dockerfile'},
     mounts: {
       '/azk/deploy/src' : path('.'),
       '/azk/deploy/.ssh': path('#{process.env.HOME}/.ssh'),
