@@ -16,7 +16,7 @@ systems({
     workdir: "/azk/#{manifest.dir}",
     shell: "/bin/bash",
     command: "npm start",
-    wait: {"retry": 20, "timeout": 1000},
+    wait: 20,
     mounts: {
       '/azk/#{manifest.dir}': path("."),
     },
@@ -58,7 +58,7 @@ systems({
     extends: 'deploy',
     envs: {
       RUN_SETUP: 'false',
-    //   RUN_DEPLOY: 'false',
+      //RUN_DEPLOY: 'false',
     }
   },
 
