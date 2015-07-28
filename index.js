@@ -61,5 +61,5 @@ app.get('/', function(req, res) {
   }
 });
 
-app.listen(PORT);
+app.listen(PORT, '0.0.0.0');
 console.log('Service %s is already done in port: %s', AZK_UID, PORT);
