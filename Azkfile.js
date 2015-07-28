@@ -52,12 +52,7 @@ systems({
   },
 
   'deploy-fast': {
-    image: {"docker": "azukiapp/deploy"},
-    mounts: {
-      "/azk/deploy/src" : path("."),
-      "/azk/deploy/.ssh": path("#{process.env.HOME}/.ssh"),
-    },
-    scalable: {"default": 0, "limit": 0},
+    extends: 'deploy',
     envs: {
       RUN_SETUP: 'false',
     //   RUN_DEPLOY: 'false',
