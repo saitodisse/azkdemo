@@ -57,7 +57,7 @@ if [ -z ${RUN_DEPLOY} ] || [ "${RUN_DEPLOY}" = "true" ]; then
   git push ${GIT_REMOTE} ${AZK_CHECKOUT_COMMIT_BRANCH_TAG}
 fi
 
-[ -z AZK_RESTART_COMMAND ] && \
+[ -z $AZK_RESTART_COMMAND ] && \
   $(AZK_RESTART_COMMAND)
 
 echo

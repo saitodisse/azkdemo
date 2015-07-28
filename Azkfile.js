@@ -63,10 +63,10 @@ systems({
   'deploy-fast': {
     extends: 'deploy',
     envs: {
-      RUN_SETUP: 'false',
       //RUN_DEPLOY: 'false',
-      RESTART: 'true',
-      REPROVISION: 'true',
+      RUN_SETUP: 'false',
+      AZK_RESTART_COMMAND: 'azk restart -R',
+      AZK_CHECKOUT_COMMIT_BRANCH_TAG: 'deploy',
     }
   },
 
