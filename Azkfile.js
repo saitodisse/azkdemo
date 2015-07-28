@@ -65,6 +65,8 @@ systems({
     envs: {
       RUN_SETUP: 'false',
       //RUN_DEPLOY: 'false',
+      RESTART: 'true',
+      REPROVISION: 'true',
     }
   },
 
