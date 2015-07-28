@@ -40,7 +40,30 @@ systems({
     export_envs: {
       "DATABASE_URL": "redis://#{net.host}:#{net.port[6379]}"
     }
-  }
+  },
+
+  deploy: {
+    image: {"docker": "azukiapp/deploy"},
+    mounts: {
+      "/azk/deploy/src" : path("."),
+      "/azk/deploy/.ssh": path("#{process.env.HOME}/.ssh"),
+    },
+    scalable: {"default": 0, "limit": 0},
+  },
+
+  'deploy-fast': {
+    image: {"docker": "azukiapp/deploy"},
+    mounts: {
+      "/azk/deploy/src" : path("."),
+      "/azk/deploy/.ssh": path("#{process.env.HOME}/.ssh"),
+    },
+    scalable: {"default": 0, "limit": 0},
+    envs: {
+      RUN_SETUP: 'false',
+    //   RUN_DEPLOY: 'false',
+    }
+  },
+
 });
 
 
